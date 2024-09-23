@@ -17,6 +17,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val questions = listOf("Вопрос 1", "Вопрос 2")
+        val questions = listOf("Вопрос 1", "Вопрос 2", "ВОПРОС 3!")
     }
 }
