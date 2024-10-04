@@ -22,13 +22,25 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val hints = listOf(
+            "Гепард бегает со скоростью Scripps-Booth Bi-Autog 1912 года.",
+            "Плотность населения в Красноярске - 2765 чел/км2.",
+            "Снежный барс - вымирающий вид животного.",
+            "У Ryzen 5 5500 12 потоков.",
+            "Звезды на флаге США обозначают штаты страны.",
+            "Карбонат натрия называют кальцинированной содой.",
+            "На банкноте в 500 рублей написано название города - Арханьгельск.",
+            "Дельфины, так же как и киты - живородящие.",
+            "Релиз Windows XP - 25 октября 2001 года, Windows 7 - 22 октября 2009 года.",
+            "Для бейсбола используется аббревиатура MLB",
+        )
         val questions = listOf(
-            "Бегемот может бежать со скоростью в 30 км/ч.",
-            "Площадь Красноярска составляет 365 км².",
+            "Гепард может бежать со скоростью в 120 км/ч.",
+            "Площадь Красноярска равна 365 км².",
             "В Красной книге нет снежного барса.",
             "В процессоре Ryzen 5 5500 ровно 6 ядер.",
             "В США более 50 штатов.",
-            "Сода - это карбонат натрия.",
+            "Пищевая сода - это гидрокарбонат натрия.",
             "На банкноте в 500 рублей нарисован памятник Петру Великому.",
             "Дельфины относятся к классу млекопитающих.",
             "По хронологии ОС Windows, после Windows XP идет Windows 7.",
@@ -50,7 +62,9 @@ class MainActivity : AppCompatActivity() {
         val yesb = findViewById<Button>(R.id.YESbutton)
         val nob = findViewById<Button>(R.id.NObutton)
         val nextb = findViewById<Button>(R.id.NEXTbutton)
+        val hint = findViewById<Button>(R.id.HintBut1)
         val que = findViewById<TextView>(R.id.Question)
+        val hinttext = findViewById<TextView>(R.id.HintViev)
         val queN = findViewById<TextView>(R.id.TextNum)
         val restart = findViewById<TextView>(R.id.RESTARTbutton)
         val resultscr = findViewById<TextView>(R.id.ResultScreen)
@@ -59,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         var score = 0
 
 
+        hinttext.visibility = View.INVISIBLE
         nextb.visibility = View.INVISIBLE
         restart.visibility = View.INVISIBLE
         resultscr.visibility = View.INVISIBLE
@@ -71,6 +86,8 @@ class MainActivity : AppCompatActivity() {
             nextb.visibility = View.VISIBLE
             yesb.visibility = View.INVISIBLE
             nob.visibility = View.INVISIBLE
+            hint.visibility = View.INVISIBLE
+            hinttext.visibility = View.INVISIBLE
         }
 
         nob.setOnClickListener {
@@ -80,12 +97,21 @@ class MainActivity : AppCompatActivity() {
             nextb.visibility = View.VISIBLE
             yesb.visibility = View.INVISIBLE
             nob.visibility = View.INVISIBLE
+            hint.visibility = View.INVISIBLE
+            hinttext.visibility = View.INVISIBLE
+        }
+
+        hint.setOnClickListener{
+            hinttext.visibility = View.VISIBLE
+            hinttext.text = hints[i]
         }
 
         nextb.setOnClickListener {
             i++
             if (i < questions.size) {
+                hint.visibility = View.VISIBLE
                 nextb.visibility = View.INVISIBLE
+                hinttext.visibility = View.INVISIBLE
                 yesb.visibility = View.VISIBLE
                 nob.visibility = View.VISIBLE
                 que.text = questions[i]
@@ -100,6 +126,8 @@ class MainActivity : AppCompatActivity() {
                 restart.visibility = View.VISIBLE
                 resultscr.text = "РЕЗУЛЬТАТ: ${score}/${questions.size}"
                 resultscr.visibility = View.VISIBLE
+                hinttext.visibility = View.INVISIBLE
+                hint.visibility = View.INVISIBLE
             }
         }
 
@@ -108,6 +136,7 @@ class MainActivity : AppCompatActivity() {
             score = 0
             que.text = questions[i]
             queN.text = "Вопрос №${i + 1}:"
+            hint.visibility = View.VISIBLE
             yesb.visibility = View.VISIBLE
             nob.visibility = View.VISIBLE
             que.visibility = View.VISIBLE
