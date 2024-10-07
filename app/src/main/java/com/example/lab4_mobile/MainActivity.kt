@@ -12,12 +12,10 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    private var icount = ""
-    private var scorecount = ""
-    private var hintclick = ""
+    private var askHint: Boolean = false
+    private var choiceIsMade: Boolean = false
     private var i: Int = 0
     private var score: Int = 0
-    private var hintIsClicked: Boolean = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +26,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         val hints = listOf(
             "Гепард бегает со скоростью Scripps-Booth Bi-Autog 1912 года.",
             "Плотность населения в Красноярске - 2765 чел/км2.",
@@ -75,7 +74,10 @@ class MainActivity : AppCompatActivity() {
         val restart = findViewById<TextView>(R.id.RESTARTbutton)
         val resultscr = findViewById<TextView>(R.id.ResultScreen)
 
+        hint.visibility = View.VISIBLE
         hinttext.visibility = View.INVISIBLE
+        yesb.visibility = View.VISIBLE
+        nob.visibility = View.VISIBLE
         nextb.visibility = View.INVISIBLE
         restart.visibility = View.INVISIBLE
         resultscr.visibility = View.INVISIBLE
@@ -83,49 +85,68 @@ class MainActivity : AppCompatActivity() {
         queN.text = "Вопрос №${i + 1}:"
 
         if (savedInstanceState != null) {
-            i = savedInstanceState.getInt(icount, 0);
-            score = savedInstanceState.getInt(scorecount, 0);
-            hintIsClicked = savedInstanceState.getBoolean(hintclick, false);
-            if (hintIsClicked) {
-                hinttext.visibility = View.VISIBLE
+            i = savedInstanceState.getInt("i_key", 0);
+            que.text = questions[i]
+            queN.text = "Вопрос №${i + 1}:"
+            score = savedInstanceState.getInt("scorecount", 0);
+
+            choiceIsMade = savedInstanceState.getBoolean("key_choice", false);
+            if (choiceIsMade){
+                yesb.visibility = View.INVISIBLE
+                nob.visibility = View.INVISIBLE
+                nextb.visibility = View.VISIBLE
+                hint.visibility = View.INVISIBLE
+            }
+            else{
+                yesb.visibility = View.VISIBLE
+                nob.visibility = View.VISIBLE
+                nextb.visibility = View.INVISIBLE
+                hint.visibility = View.VISIBLE
+            }
+
+            askHint = savedInstanceState.getBoolean("key_hint", false);
+            if (askHint) {
                 hinttext.text = hints[i]
+                hinttext.visibility = View.VISIBLE
             }
             else hinttext.visibility = View.INVISIBLE
-            que.text = questions[i];
-            queN.text = "Вопрос №${i + 1}:"
         }
 
         yesb.setOnClickListener {
             if (answers[i]){
                 score++
             }
-            nextb.visibility = View.VISIBLE
+            askHint = false
+            choiceIsMade = true
             yesb.visibility = View.INVISIBLE
             nob.visibility = View.INVISIBLE
             hint.visibility = View.INVISIBLE
             hinttext.visibility = View.INVISIBLE
+            nextb.visibility = View.VISIBLE
         }
 
         nob.setOnClickListener {
             if (!answers[i]){
                 score++
             }
-            nextb.visibility = View.VISIBLE
+            askHint = false
+            choiceIsMade = true
             yesb.visibility = View.INVISIBLE
             nob.visibility = View.INVISIBLE
             hint.visibility = View.INVISIBLE
             hinttext.visibility = View.INVISIBLE
+            nextb.visibility = View.VISIBLE
         }
 
         hint.setOnClickListener{
-            hinttext.visibility = View.VISIBLE
             hinttext.text = hints[i]
-            hintIsClicked = true
+            hinttext.visibility = View.VISIBLE
+            askHint = true
         }
 
         nextb.setOnClickListener {
             i++
-            hintIsClicked = false
+            choiceIsMade = false
             nextb.visibility = View.INVISIBLE
             if (i < questions.size) {
                 hint.visibility = View.VISIBLE
@@ -140,11 +161,11 @@ class MainActivity : AppCompatActivity() {
                 nob.visibility = View.INVISIBLE
                 que.visibility = View.INVISIBLE
                 queN.visibility = View.INVISIBLE
+                hinttext.visibility = View.INVISIBLE
+                hint.visibility = View.INVISIBLE
                 restart.visibility = View.VISIBLE
                 resultscr.text = "РЕЗУЛЬТАТ: ${score}/${questions.size}"
                 resultscr.visibility = View.VISIBLE
-                hinttext.visibility = View.INVISIBLE
-                hint.visibility = View.INVISIBLE
             }
         }
 
@@ -161,13 +182,13 @@ class MainActivity : AppCompatActivity() {
             restart.visibility = View.INVISIBLE
             resultscr.visibility = View.INVISIBLE
         }
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(icount, i)
-        outState.putInt(scorecount, score)
-        outState.putBoolean(hintclick, hintIsClicked)
+        outState.putInt("i_key", i)
+        outState.putInt("scorecount", i)
+        outState.putBoolean("key_choice", choiceIsMade)
+        outState.putBoolean("key_hint", askHint)
     }
 }

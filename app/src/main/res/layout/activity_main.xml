@@ -121,16 +121,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.669" />
+        app:layout_constraintVertical_bias="0.628" />
 
     <TextView
         android:id="@+id/HintViev"
         android:layout_width="237dp"
         android:layout_height="84dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="92dp"
         android:text="-"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/HintBut1"
+        app:layout_constraintVertical_bias="0.596" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
