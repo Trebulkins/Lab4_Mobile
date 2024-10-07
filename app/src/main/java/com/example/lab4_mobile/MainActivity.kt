@@ -1,11 +1,9 @@
 package com.example.lab4_mobile
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,6 +11,14 @@ import androidx.core.view.WindowInsetsCompat
 
 
 class MainActivity : AppCompatActivity() {
+
+    private var icount = ""
+    private var scorecount = ""
+    private var hintclick = ""
+    private var i: Int = 0
+    private var score: Int = 0
+    private var hintIsClicked: Boolean = false;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -69,16 +75,26 @@ class MainActivity : AppCompatActivity() {
         val restart = findViewById<TextView>(R.id.RESTARTbutton)
         val resultscr = findViewById<TextView>(R.id.ResultScreen)
 
-        var i = 0
-        var score = 0
-
-
         hinttext.visibility = View.INVISIBLE
         nextb.visibility = View.INVISIBLE
         restart.visibility = View.INVISIBLE
         resultscr.visibility = View.INVISIBLE
         que.text = questions[i]
         queN.text = "Вопрос №${i + 1}:"
+
+        if (savedInstanceState != null) {
+            i = savedInstanceState.getInt(icount, 0);
+            score = savedInstanceState.getInt(scorecount, 0);
+            hintIsClicked = savedInstanceState.getBoolean(hintclick, false);
+            if (hintIsClicked) {
+                hinttext.visibility = View.VISIBLE
+                hinttext.text = hints[i]
+            }
+            else hinttext.visibility = View.INVISIBLE
+            que.text = questions[i];
+            queN.text = "Вопрос №${i + 1}:"
+        }
+
         yesb.setOnClickListener {
             if (answers[i]){
                 score++
@@ -104,13 +120,15 @@ class MainActivity : AppCompatActivity() {
         hint.setOnClickListener{
             hinttext.visibility = View.VISIBLE
             hinttext.text = hints[i]
+            hintIsClicked = true
         }
 
         nextb.setOnClickListener {
             i++
+            hintIsClicked = false
+            nextb.visibility = View.INVISIBLE
             if (i < questions.size) {
                 hint.visibility = View.VISIBLE
-                nextb.visibility = View.INVISIBLE
                 hinttext.visibility = View.INVISIBLE
                 yesb.visibility = View.VISIBLE
                 nob.visibility = View.VISIBLE
@@ -118,7 +136,6 @@ class MainActivity : AppCompatActivity() {
                 queN.text = "Вопрос №${i + 1}:"
             }
             else {
-                nextb.visibility = View.INVISIBLE
                 yesb.visibility = View.INVISIBLE
                 nob.visibility = View.INVISIBLE
                 que.visibility = View.INVISIBLE
@@ -144,5 +161,13 @@ class MainActivity : AppCompatActivity() {
             restart.visibility = View.INVISIBLE
             resultscr.visibility = View.INVISIBLE
         }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(icount, i)
+        outState.putInt(scorecount, score)
+        outState.putBoolean(hintclick, hintIsClicked)
     }
 }

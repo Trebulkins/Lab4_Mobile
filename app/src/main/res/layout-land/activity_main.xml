@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/TextNum"
+            android:layout_width="137dp"
+            android:layout_height="26dp"
+            android:text="-"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/Question"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/Question"
+            android:layout_width="318dp"
+            android:layout_height="101dp"
+            android:text="-"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.148" />
+
+        <TextView
+            android:id="@+id/ResultScreen"
+            android:layout_width="359dp"
+            android:layout_height="86dp"
+            android:text="-"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.141" />
+
+        <Button
+            android:id="@+id/YESbutton"
+            android:layout_width="218dp"
+            android:layout_height="87dp"
+            android:backgroundTint="#4CAF50"
+            android:onClick="sayYES"
+            android:text="ДА"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFEB3B"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:cornerRadius="40px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.062"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.469" />
+
+        <Button
+            android:id="@+id/NObutton"
+            android:layout_width="217dp"
+            android:layout_height="79dp"
+            android:backgroundTint="#FF0000"
+            android:text="НЕТ"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFEB3B"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:cornerRadius="40px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.936"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.469" />
+
+        <Button
+            android:id="@+id/NEXTbutton"
+            android:layout_width="378dp"
+            android:layout_height="84dp"
+            android:backgroundTint="#9C27B0"
+            android:text="ДАЛЬШЕ"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498" />
+
+        <Button
+            android:id="@+id/RESTARTbutton"
+            android:layout_width="378dp"
+            android:layout_height="84dp"
+            android:backgroundTint="#9C27B0"
+            android:text="ЗАНОВО"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.468" />
+
+        <Button
+            android:id="@+id/HintBut1"
+            android:layout_width="145dp"
+            android:layout_height="72dp"
+            android:text="Подсказка!"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.233"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.811" />
+
+        <TextView
+            android:id="@+id/HintViev"
+            android:layout_width="237dp"
+            android:layout_height="84dp"
+            android:layout_marginEnd="132dp"
+            android:layout_marginBottom="36dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
